@@ -8,4 +8,10 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
   end
+
+  def search
+    # Rails.logger.info("Params given: #{params.inspect}")
+    wildcard_search = "%#{params[:search]}%"
+    @movies = Movie.where('title LIKE ?', wildcard_search)
+  end
 end
