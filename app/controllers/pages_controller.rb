@@ -40,7 +40,7 @@ class PagesController < ApplicationController
   def update
     respond_to do |format|
       if @page.update(page_params)
-        format.html { redirect_to page_url(@page.permalink), notice: 'Page was successfully updated.' }
+        format.html { redirect_to page_url(@page), notice: 'Page was successfully updated.' }
         format.json { render :show, status: :ok, location: @page }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,8 +63,9 @@ class PagesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_page
-    @page = Page.find_by(permalink: params[:id])
-    # @page = Page.find_by(permalink: params[:permalink])
+    # @page = Page.find_by(permalink: params[:id])
+
+    @page = Page.find_by(permalink: params[:permalink])
   end
 
   # Only allow a list of trusted parameters through.
